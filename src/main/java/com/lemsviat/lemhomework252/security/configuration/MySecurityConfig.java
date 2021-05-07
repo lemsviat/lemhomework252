@@ -19,7 +19,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-    @Autowired
+    //@Autowired
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource);
@@ -36,6 +36,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/files", "/events")
                 .hasAnyRole(RoleUser, RoleModerator, RoleAdmin)
                 .antMatchers("/moderators_info").hasAnyRole(RoleModerator, RoleAdmin)
+                .antMatchers("/uploadingS3_info").hasAnyRole(RoleModerator, RoleAdmin)
                 .antMatchers("/admins_info").hasRole(RoleAdmin)
                 .antMatchers("/customers/**").hasRole(RoleAdmin)
                 .and().formLogin().permitAll()

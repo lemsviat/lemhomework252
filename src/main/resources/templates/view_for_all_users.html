@@ -4,7 +4,6 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
        lang="en">
 
-
 <body>
 
 <div>
@@ -20,7 +19,7 @@
     </div>
     <br>
 
-    <div style="text-align: center; background-color: darkgrey; width: 450px; padding-bottom: 10px; padding-top: 1px">
+    <div style="text-align: center; background-color: darkgray; width: 450px; padding-bottom: 10px; padding-top: 1px">
         <div>
             <h3>Getting files from database</h3>
             <form action="/files" method="GET">
@@ -40,26 +39,44 @@
     <br>
 
     <div sec:authorize="hasAnyRole('MODERATOR, ADMIN')"
-         style="text-align: center; background-color: burlywood; width: 450px; padding-bottom: 5px; padding-top: 5px">
+         style="text-align: center; background-color: bisque; width: 450px; padding-bottom: 5px; padding-top: 5px">
         <div>
-            <h3>Moving files to/from AWS S3</h3>
-            <input type="button" value="Upload file to AWS S3" onclick="window.location.href='moderators_info'">
-            <input type="button" value="Delete file from AWS S3" onclick="window.location.href='moderators_info'">
-            <br><br>
-            Only for moderators and administrators!
+            <h3>Manipulating files using AWS S3</h3>
+
+            <div style="text-align: center; background-color: bisque; width: 450px">
+                <div>
+                    <form action="/uploadingS3_info" method="GET">
+                        Name of file in your computer: <label>
+                        <input name="fileInPC"/>
+                    </label>
+                        <br><br>
+                        Name of file, you want to have in S3: <label>
+                        <input name="fileInS3"/>
+                    </label>
+                        <br><br>
+                        <input type="submit" value="Upload this file to S3"/>
+                        <br><br>
+                    </form>
+                    <form action="/deletingS3_info" method="GET">
+                        Name of file, you want to delete in S3: <label>
+                        <input name="fileInS3"/>
+                    </label>
+                        <br><br>
+                        <input type="submit" value="Delete this file in S3"/>
+                        <br><br>
+                    </form>
+                </div>
+            </div>
+
+          <!--  <input type="button" value="Upload file to AWS S3" onclick="window.location.href='uploadingS3_info'">
+            <input type="button" value="Delete file from AWS S3" onclick="window.location.href='moderators_info'">-->
+            <!--<br>
+            Only for moderators and administrators!-->
         </div>
     </div>
 
     <br>
 
-   <!-- <div sec:authorize="hasRole('ADMIN')"
-            style="text-align: center; background-color: cornflowerblue; width: 450px; padding-bottom: 5px; padding-top: 5px">
-        <div>
-            <input type="button" value="For Admins" onclick="window.location.href='admins_info'">
-            Only for administrators!
-        </div>
-    </div>
-    <br>-->
 
     <div sec:authorize="hasRole('ADMIN')"
             style="text-align: center; background-color: lightsalmon; width: 450px; padding-bottom: 10px; padding-top: 1px">
@@ -68,12 +85,12 @@
             <form action="/customers" method="GET">
                 <input type="submit" value="Get customers from database"/>
             </form>
-            <br>
+            <!--<br>
             <form action="/customers" method="POST">
                 <input type="submit" value="Add customers to database"/>
             </form>
-            <br>
-            Only for administrators!
+            <br> <br>
+            Only for administrators!-->
         </div>
     </div>
     <br>

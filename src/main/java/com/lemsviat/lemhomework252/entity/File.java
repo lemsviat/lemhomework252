@@ -19,4 +19,5 @@ public class File {
     @Column(name = "file_status")
     @Enumerated(EnumType.STRING)
     private FileStatus fileStatus;
+
 }
