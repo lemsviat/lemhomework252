@@ -2,100 +2,125 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-       lang="en">
+      lang="en">
+
+<head>
+    <title>Module-2.5</title>
+    <!-- <link href="resources/static/index.css" rel="stylesheet" type="text/css">-->
+    <link rel="stylesheet" th:href="@{/index.css}"/>
+</head>
 
 <body>
 
 <div>
-    <div style="text-align: center; background-color: cornflowerblue; width: 450px; padding-bottom: 5px; padding-top: 1px">
-        <h3> Information for all users</h3>
-    </div>
-    <br>
+    <div class="main">
 
-     <div style="text-align: center; background-color: forestgreen; width: 450px; padding-bottom: 5px; padding-top: 5px">
-        <div>
-            <input type="button" value="Logout" onclick="window.location.href='/logout'">
-        </div>
-    </div>
-    <br>
+        <div class="container">
+            <div class="borderElement">
+                <div class="row-1">
+                    <div style="text-align: center; background-color: cornflowerblue; width: 500px;">
+                        <h3> Information for all users</h3>
+                    </div>
 
-    <div style="text-align: center; background-color: darkgray; width: 450px; padding-bottom: 10px; padding-top: 1px">
-        <div>
-            <h3>Getting files from database</h3>
-            <form action="/files" method="GET">
-                <input type="submit" value="Get list of files uploaded to S3"/>
-            </form>
-        </div>
-    </div>
-    <br>
-    <div style="text-align: center; background-color: darkgrey; width: 450px; padding-bottom: 10px; padding-top: 1px">
-        <div>
-            <h3>Getting events from database</h3>
-            <form action="/events" method="GET">
-                <input type="submit" value="Get events"/>
-            </form>
-        </div>
-    </div>
-    <br>
+                    <div style="text-align: center; background-color: limegreen; width: 500px; padding-bottom: 5px; padding-top: 5px">
+                        <div sec:authorize="isAuthenticated()">
+                            Authenticated as "<span sec:authentication="name"></span>" </div>
+                        <div>
+                            <input type="button" value="Logout" onclick="window.location.href='/logout'">
+                        </div>
+                    </div>
 
-    <div sec:authorize="hasAnyRole('MODERATOR, ADMIN')"
-         style="text-align: center; background-color: bisque; width: 450px; padding-bottom: 5px; padding-top: 5px">
-        <div>
-            <h3>Manipulating files using AWS S3</h3>
-
-            <div style="text-align: center; background-color: bisque; width: 450px">
-                <div>
-                    <form action="/uploadingS3_info" method="GET">
-                        Name of file in your computer: <label>
-                        <input name="fileInPC"/>
-                    </label>
-                        <br><br>
-                        Name of file, you want to have in S3: <label>
-                        <input name="fileInS3"/>
-                    </label>
-                        <br><br>
-                        <input type="submit" value="Upload this file to S3"/>
-                        <br><br>
-                    </form>
-                    <form action="/deletingS3_info" method="GET">
-                        Name of file, you want to delete in S3: <label>
-                        <input name="fileInS3"/>
-                    </label>
-                        <br><br>
-                        <input type="submit" value="Delete this file in S3"/>
-                        <br><br>
-                    </form>
+                    <div style="text-align: center; background-color: darkgray; width: 500px;">
+                        <div>
+                            <h3>Getting files from database</h3>
+                            <form action="/files" method="GET">
+                                <input type="submit" value="Get list of files uploaded to S3"/>
+                            </form>
+                        </div>
+                    </div>
+                    <div style="text-align: center; background-color: darkgray; width: 500px;">
+                        <div>
+                            <h3>Getting events from database</h3>
+                            <form action="/events" method="GET">
+                                <input type="submit" value="Get events"/>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <br>
+            <div class="borderElement" sec:authorize="hasAnyRole('MODERATOR, ADMIN')">
+                <div class="row-1">
+                    <div sec:authorize="hasAnyRole('MODERATOR, ADMIN')"
+                         style="text-align: center; background-color: bisque; width: 500px;">
+                        <div>
+                            <h3>Manipulating files using AWS S3</h3>
 
-          <!--  <input type="button" value="Upload file to AWS S3" onclick="window.location.href='uploadingS3_info'">
-            <input type="button" value="Delete file from AWS S3" onclick="window.location.href='moderators_info'">-->
-            <!--<br>
-            Only for moderators and administrators!-->
+                            <div style="text-align: center; background-color: bisque; width: 500px">
+                                <div>
+                                    <form action="/uploadingS3_info" method="GET">
+                                        Name of file in your computer: <label>
+                                        <input name="fileInPC"/>
+                                    </label>
+                                        <br><br>
+                                        Name of file, you want to have in S3: <label>
+                                        <input name="fileInS3"/>
+                                    </label>
+                                        <br><br>
+                                        <input type="submit" value="Upload this file to S3"/>
+                                        <br><br>
+                                    </form>
+                                    <form action="/deletingS3_info" method="GET">
+                                        Name of file, you want to delete in S3: <label>
+                                        <input name="fileInS3"/>
+                                    </label>
+                                        <br><br>
+                                        <input type="submit" value="Delete this file in S3"/>
+                                        <br>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="borderElement" sec:authorize="hasRole('ADMIN')">
+                <div class="row-2">
+                    <div sec:authorize="hasRole('ADMIN')"
+                         style="text-align: center; background-color: lightsalmon; width: 500px;">
+                        <div>
+                            <h3>Manipulating with customers</h3>
+                            <form action="/customers" method="get">
+                                <input type="submit" value="Get customers from database"/>
+                            </form>
+                            <br>
+                        </div>
+                        <div>
+                            <form action="/customers" method="post">
+                                Name: <label>
+                                <input name="username"/>
+                            </label>
+                                <br><br>
+                                Account: <label>
+                                <input name="account"/>
+                            </label>
+                                <br><br>
+                                AccountStatus: <label>
+                                <input name="accountStatus"/>
+                            </label>
+                                <br><br>
+                                <input type="submit" value="Add customer to database"/>
+                                <br>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+
+                </div>
+            </div>
         </div>
     </div>
-
-    <br>
-
-
-    <div sec:authorize="hasRole('ADMIN')"
-            style="text-align: center; background-color: lightsalmon; width: 450px; padding-bottom: 10px; padding-top: 1px">
-        <div>
-            <h3>Manipulating with customers</h3>
-            <form action="/customers" method="GET">
-                <input type="submit" value="Get customers from database"/>
-            </form>
-            <!--<br>
-            <form action="/customers" method="POST">
-                <input type="submit" value="Add customers to database"/>
-            </form>
-            <br> <br>
-            Only for administrators!-->
-        </div>
-    </div>
-    <br>
-
 </div>
-
 </body>
 </html>

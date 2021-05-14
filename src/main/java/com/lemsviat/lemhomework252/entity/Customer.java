@@ -2,16 +2,20 @@ package com.lemsviat.lemhomework252.entity;
 
 import lombok.Data;
 import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "customers")
 @Data
-@Log
+@Slf4j
 public class Customer {
 
     @Id
@@ -29,9 +33,10 @@ public class Customer {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "customer_id")
-    private List<File> fileList;
+    private Set<File> fileSet;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL)
     //@Fetch(FetchMode.JOIN)
     @JoinColumn(name = "customer_id")
     private List<Event> eventList;

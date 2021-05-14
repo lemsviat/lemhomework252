@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: 10-1
+      author: Admin (generated)
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: username
+                  value: olena
+              - column:
+                  name: password
+                  value: '{bcrypt}$2a$10$kC2pbiv7SoKHxekAJxz.y.dgojuajNtKyTRYIYAbGBixu79VIv3I6'
+              - column:
+                  name: enabled
+                  valueBoolean: true
+            tableName: users
+        - insert:
+            columns:
+              - column:
+                  name: username
+                  value: petro
+              - column:
+                  name: password
+                  value: '{bcrypt}$2a$10$melB7CinfafsuSIh0UDh6Ot4/sOkj6.Y.SprD6r0ptnFrrslc2xJa'
+              - column:
+                  name: enabled
+                  valueBoolean: true
+            tableName: users
+        - insert:
+            columns:
+              - column:
+                  name: username
+                  value: root
+              - column:
+                  name: password
+                  value: '{bcrypt}$2a$10$0wpY2lPGjr0W3jeDcm55K.xlJei/Pchk5GWFODXeACRF9kSS2eXZa'
+              - column:
+                  name: enabled
+                  valueBoolean: true
+            tableName: users
+  - changeSet:
+      id: 10-2
+      author: Admin (generated)
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: username
+                  value: petro
+              - column:
+                  name: authority
+                  value: ROLE_USER
+            tableName: authorities
+        - insert:
+            columns:
+              - column:
+                  name: username
+                  value: olena
+              - column:
+                  name: authority
+                  value: ROLE_MODERATOR
+            tableName: authorities
+        - insert:
+            columns:
+              - column:
+                  name: username
+                  value: root
+              - column:
+                  name: authority
+                  value: ROLE_ADMIN
+            tableName: authorities
+
+

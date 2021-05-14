@@ -9,7 +9,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @ComponentScan(basePackages = "com.lemsviat.lemhomework252")
-@EnableWebMvc
+//@EnableWebMvc
 public class MyConfig{
     @Bean
     public ViewResolver viewResolver() {

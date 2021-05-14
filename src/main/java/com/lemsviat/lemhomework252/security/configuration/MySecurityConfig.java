@@ -5,7 +5,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
 
 import javax.sql.DataSource;
 
@@ -23,11 +22,6 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource);
-       /* User.UserBuilder userBuilder = User.withDefaultPasswordEncoder();
-        auth.inMemoryAuthentication()
-                .withUser(userBuilder.username("petro").password("petro").roles(RoleUser))
-                .withUser(userBuilder.username("olena").password("olena").roles(RoleModerator))
-                .withUser(userBuilder.username("root").password("Dev911Base!@#").roles(RoleAdmin));*/
     }
 
     @Override
@@ -35,11 +29,12 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/files", "/events")
                 .hasAnyRole(RoleUser, RoleModerator, RoleAdmin)
-                .antMatchers("/moderators_info").hasAnyRole(RoleModerator, RoleAdmin)
+                .antMatchers("/deletingS3_info").hasAnyRole(RoleModerator, RoleAdmin)
                 .antMatchers("/uploadingS3_info").hasAnyRole(RoleModerator, RoleAdmin)
-                .antMatchers("/admins_info").hasRole(RoleAdmin)
                 .antMatchers("/customers/**").hasRole(RoleAdmin)
                 .and().formLogin().permitAll()
                 .and().logout();
+
+        http.cors().and().csrf().disable();
     }
 }

@@ -1,0 +1,220 @@
+databaseChangeLog:
+- changeSet:
+    id: 1620816249958-1
+    author: Admin (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: account_id
+            type: BIGINT
+        - column:
+            name: account_status
+            type: VARCHAR(255)
+        - column:
+            name: account_value
+            type: BIGINT
+        tableName: accounts
+- changeSet:
+    id: 1620816249958-2
+    author: Admin (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            name: username
+            type: VARCHAR(15)
+        - column:
+            name: authority
+            type: VARCHAR(25)
+        tableName: authorities
+- changeSet:
+    id: 1620816249958-3
+    author: Admin (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: id
+            type: INT
+        - column:
+            name: name
+            type: VARCHAR(255)
+        - column:
+            name: acc_id
+            type: BIGINT
+        tableName: customers
+- changeSet:
+    id: 1620816249958-4
+    author: Admin (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: event_id
+            type: INT
+        - column:
+            name: event_name
+            type: VARCHAR(255)
+        - column:
+            name: customer_id
+            type: INT
+        tableName: events
+- changeSet:
+    id: 1620816249958-5
+    author: Admin (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: file_id
+            type: BIGINT
+        - column:
+            name: file_name
+            type: VARCHAR(255)
+        - column:
+            name: file_status
+            type: VARCHAR(255)
+        - column:
+            name: customer_id
+            type: INT
+        tableName: files
+- changeSet:
+    id: 1620816249958-6
+    author: Admin (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: username
+            type: VARCHAR(15)
+        - column:
+            name: password
+            type: VARCHAR(100)
+        - column:
+            name: enabled
+            type: BIT(1)
+        tableName: users
+- changeSet:
+    id: 1620816249958-7
+    author: Admin (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: customer_id
+        indexName: FKii5rb5kwirlh7h032gijcixiy
+        tableName: events
+- changeSet:
+    id: 1620816249958-8
+    author: Admin (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: acc_id
+        indexName: FKl6yafmk33fk7ceyy9nx7m34cw
+        tableName: customers
+- changeSet:
+    id: 1620816249958-9
+    author: Admin (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: customer_id
+        indexName: FKmqml380c9n4uhnwijaa6hyxmx
+        tableName: files
+- changeSet:
+    id: 1620816249958-10
+    author: Admin (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: username
+        indexName: username
+        tableName: authorities
+- changeSet:
+    id: 1620816249958-11
+    author: Admin (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: customer_id
+        baseTableName: events
+        constraintName: FKii5rb5kwirlh7h032gijcixiy
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id
+        referencedTableName: customers
+        validate: true
+- changeSet:
+    id: 1620816249958-12
+    author: Admin (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: acc_id
+        baseTableName: customers
+        constraintName: FKl6yafmk33fk7ceyy9nx7m34cw
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: account_id
+        referencedTableName: accounts
+        validate: true
+- changeSet:
+    id: 1620816249958-13
+    author: Admin (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: customer_id
+        baseTableName: files
+        constraintName: FKmqml380c9n4uhnwijaa6hyxmx
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: id
+        referencedTableName: customers
+        validate: true
+- changeSet:
+    id: 1620816249958-14
+    author: Admin (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: username
+        baseTableName: authorities
+        constraintName: authorities_ibfk_1
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: RESTRICT
+        onUpdate: RESTRICT
+        referencedColumnNames: username
+        referencedTableName: users
+        validate: true
+
+- include:
+      file: liquibase/changelog/dbchangelog-security.yaml
+

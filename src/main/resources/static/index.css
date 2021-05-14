@@ -1,0 +1,44 @@
+
+.main {
+    height: 80%;
+}
+
+.container {
+    background: #425b9c;
+    text-align: center;
+    border-radius: 50px;
+}
+
+.flex-container {
+    /*генерирует flex-контейнер уровня блока*/
+    display: -webkit-flex;
+    display: flex;
+
+    display: -webkit-inline-flex;
+    display: inline-flex;
+}
+
+.row-1 {
+    color: darkslategray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    display: -webkit-flex;
+    -webkit-justify-content: space-between;
+}
+.row-2 {
+    color: blue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    display: -webkit-flex;
+    -webkit-justify-content: space-between;
+}
+
+.borderElement {
+    background-color: #EEDDFF;
+    border: 5px solid #7922CC;
+    border-radius: 50px;
+}
